@@ -9,13 +9,13 @@ import UIKit
 import Nuke
 
 public class NukeInputSource: NSObject, InputSource {
-    var url: URL?
+    private let url: URL?
     
-    init(url: URL?) {
+    public init(url: URL?) {
         self.url = url
     }
     
-    func load(to imageView: UIImageView, with callback: @escaping (UIImage?) -> Void) {
+    public func load(to imageView: UIImageView, with callback: @escaping (UIImage?) -> Void) {
         if let url = url {
             ImagePipeline.shared.loadImage(with: url) { result in
                 switch result {
