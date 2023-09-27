@@ -1,5 +1,5 @@
 //
-//  UtechiaImageSliderView.swift
+//  UtechiaImageSlider.swift
 //  UtechiaImageSlider
 //
 //  Created by Vahid Sayad on 9/25/23.
@@ -12,10 +12,24 @@ public struct UtechiaImageSlider: UIViewRepresentable {
     
     public let inputSources: [InputSource]
     @Binding public var currentPageNumber: Int
-    public let isZoomEnabled: Bool = true
-    public let maximumZoomScale: CGFloat = 3.5
-    public let isCircular: Bool = false
+    public let isZoomEnabled: Bool
+    public let maximumZoomScale: CGFloat
+    public let isCircular: Bool
     public var singleTapped: (() -> Void)?
+    
+    public init(inputSources: [InputSource],
+                currentPageNumber: Binding<Int>,
+                isZoomEnabled: Bool = true,
+                maximumZoomScale: CGFloat = 3.5,
+                isCircular: Bool = false,
+                singleTapped: (() -> Void)?) {
+        self.inputSources = inputSources
+        self._currentPageNumber = currentPageNumber
+        self.isZoomEnabled = isZoomEnabled
+        self.maximumZoomScale = maximumZoomScale
+        self.isCircular = isCircular
+        self.singleTapped = singleTapped
+    }
     
     public func makeUIView(context: Context) -> ImageSlideshow {
         slideShow.setImageInputs(inputSources)
@@ -30,16 +44,16 @@ public struct UtechiaImageSlider: UIViewRepresentable {
     }
     
     public class Coordinator: ImageSlideshowDelegate {
-        var slideShow: ImageSlideshow
-        var currentPageIsSet = false
-        var singleTapped: (() -> Void)?
+        public var slideShow: ImageSlideshow
+        public var currentPageIsSet = false
+        public var singleTapped: (() -> Void)?
         
-        init(slideShow: ImageSlideshow, singleTapped: (() -> Void)?) {
+        public init(slideShow: ImageSlideshow, singleTapped: (() -> Void)?) {
             self.slideShow = slideShow
             self.singleTapped = singleTapped
         }
         
-        func singleTapped(_ imageSlideshow: ImageSlideshow) {
+        public func singleTapped(_ imageSlideshow: ImageSlideshow) {
             singleTapped?()
         }
     }
