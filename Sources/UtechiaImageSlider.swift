@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct UtechiaImageSlider: UIViewRepresentable {
+public struct UtechiaImageSlider {
     private let slideShow = ImageSlideshow()
     
     private let inputSources: [InputSource]
@@ -30,7 +30,7 @@ public struct UtechiaImageSlider: UIViewRepresentable {
         self.isCircular = isCircular
         self.singleTapped = singleTapped
     }
-    
+    /*
     func makeUIView(context: Context) -> ImageSlideshow {
         slideShow.setImageInputs(inputSources)
         slideShow.zoomEnabled = isZoomEnabled
@@ -73,4 +73,5 @@ public struct UtechiaImageSlider: UIViewRepresentable {
             impactMed.impactOccurred()
         }
     }
+     */
 }
