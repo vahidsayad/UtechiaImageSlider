@@ -8,7 +8,7 @@
 import UIKit
 import Nuke
 
-class NukeInputSource: NSObject, InputSource {
+public class NukeInputSource: NSObject, InputSource {
     var url: URL?
     
     init(url: URL?) {

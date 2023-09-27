@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct UtechiaImageSlider: UIViewRepresentable {
+public struct UtechiaImageSlider: UIViewRepresentable {
     private let slideShow = ImageSlideshow()
     
     let inputSources: [InputSource]
