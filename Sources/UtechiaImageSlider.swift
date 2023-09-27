@@ -7,30 +7,16 @@
 
 import SwiftUI
 
-public struct UtechiaImageSlider {
-    private let slideShow = ImageSlideshow()
+public struct UtechiaImageSlider: UIViewRepresentable {
+    public let slideShow = ImageSlideshow()
     
-    private let inputSources: [InputSource]
-    @Binding private var currentPageNumber: Int
-    private let isZoomEnabled: Bool
-    private let maximumZoomScale: CGFloat
-    private let isCircular: Bool
-    private var singleTapped: (() -> Void)?
+    public let inputSources: [InputSource]
+    @Binding public var currentPageNumber: Int
+    public let isZoomEnabled: Bool = true
+    public let maximumZoomScale: CGFloat = 3.5
+    public let isCircular: Bool = false
+    public var singleTapped: (() -> Void)?
     
-    public init(inputSources: [InputSource],
-                currentPageNumber: Binding<Int>,
-                isZoomEnabled: Bool = true,
-                maximumZoomScale: CGFloat = 3.5,
-                isCircular: Bool = false,
-                singleTapped: (() -> Void)?) {
-        self.inputSources = inputSources
-        self._currentPageNumber = currentPageNumber
-        self.isZoomEnabled = isZoomEnabled
-        self.maximumZoomScale = maximumZoomScale
-        self.isCircular = isCircular
-        self.singleTapped = singleTapped
-    }
-    /*
     func makeUIView(context: Context) -> ImageSlideshow {
         slideShow.setImageInputs(inputSources)
         slideShow.zoomEnabled = isZoomEnabled
@@ -73,5 +59,4 @@ public struct UtechiaImageSlider {
             impactMed.impactOccurred()
         }
     }
-     */
 }
