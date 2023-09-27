@@ -17,7 +17,7 @@ public struct UtechiaImageSliderView: UIViewRepresentable {
     public let isCircular: Bool = false
     public var singleTapped: (() -> Void)?
     
-    func makeUIView(context: Context) -> ImageSlideshow {
+    public func makeUIView(context: Context) -> ImageSlideshow {
         slideShow.setImageInputs(inputSources)
         slideShow.zoomEnabled = isZoomEnabled
         slideShow.maximumScale = maximumZoomScale
@@ -29,7 +29,7 @@ public struct UtechiaImageSliderView: UIViewRepresentable {
         return slideShow
     }
     
-    class Coordinator: ImageSlideshowDelegate {
+    public class Coordinator: ImageSlideshowDelegate {
         var slideShow: ImageSlideshow
         var currentPageIsSet = false
         var singleTapped: (() -> Void)?
@@ -44,11 +44,11 @@ public struct UtechiaImageSliderView: UIViewRepresentable {
         }
     }
     
-    func makeCoordinator() -> Coordinator {
+    public func makeCoordinator() -> Coordinator {
         Coordinator(slideShow: slideShow, singleTapped: singleTapped)
     }
     
-    func updateUIView(_ uiView: ImageSlideshow, context: Context) {
+    public func updateUIView(_ uiView: ImageSlideshow, context: Context) {
         if !context.coordinator.currentPageIsSet {
             slideShow.setCurrentPage(currentPageNumber, animated: true)
             context.coordinator.currentPageIsSet = true
