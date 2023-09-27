@@ -1,5 +1,5 @@
 //
-//  UtechiaImageSlider.swift
+//  UtechiaImageSliderView.swift
 //  UtechiaImageSlider
 //
 //  Created by Vahid Sayad on 9/25/23.
