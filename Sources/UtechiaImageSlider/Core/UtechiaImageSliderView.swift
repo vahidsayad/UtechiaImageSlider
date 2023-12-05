@@ -15,6 +15,7 @@ public struct UtechiaImageSlider: UIViewRepresentable {
     public let isZoomEnabled: Bool
     public let maximumZoomScale: CGFloat
     public let isCircular: Bool
+    public let contentMode: UIViewContentMode = UIViewContentMode.scaleAspectFit
     public var singleTapped: (() -> Void)?
     
     public init(inputSources: [InputSource],
@@ -37,6 +38,7 @@ public struct UtechiaImageSlider: UIViewRepresentable {
         slideShow.maximumScale = maximumZoomScale
         slideShow.pageIndicator = nil
         slideShow.circular = isCircular
+        slideShow.contentScaleMode = contentMode
         slideShow.delegate = context.coordinator
         slideShow.activityIndicator = DefaultActivityIndicator(style: .medium, color: .white)
         slideShow.backgroundColor = UIColor.clear
