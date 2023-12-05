@@ -20,6 +20,7 @@ public struct UtechiaImageSlider: UIViewRepresentable {
     public let currentPageIndicatorTintColor: UIColor
     public let pageIndicatorTintColor: UIColor
     public let pageIndicatorPosition: PageIndicatorPosition
+    public let slideshowInterval: TimeInterval
     public var singleTapped: (() -> Void)?
     
     public init(inputSources: [InputSource],
@@ -32,6 +33,7 @@ public struct UtechiaImageSlider: UIViewRepresentable {
                 currentPageIndicatorTintColor: UIColor = .lightGray,
                 pageIndicatorTintColor: UIColor = .black,
                 pageIndicatorPosition: PageIndicatorPosition = .init(),
+                slideshowInterval: TimeInterval = 0,
                 singleTapped: (() -> Void)?) {
         self.inputSources = inputSources
         self._currentPageNumber = currentPageNumber
@@ -43,6 +45,7 @@ public struct UtechiaImageSlider: UIViewRepresentable {
         self.currentPageIndicatorTintColor = currentPageIndicatorTintColor
         self.pageIndicatorTintColor = pageIndicatorTintColor
         self.pageIndicatorPosition = pageIndicatorPosition
+        self.slideshowInterval = slideshowInterval
         self.singleTapped = singleTapped
     }
     
@@ -61,6 +64,7 @@ public struct UtechiaImageSlider: UIViewRepresentable {
         }
         slideShow.circular = isCircular
         slideShow.contentScaleMode = contentMode
+        slideShow.slideshowInterval = slideshowInterval
         slideShow.delegate = context.coordinator
         slideShow.activityIndicator = DefaultActivityIndicator(style: .medium, color: .white)
         slideShow.backgroundColor = UIColor.clear
