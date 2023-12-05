@@ -15,7 +15,7 @@ public struct UtechiaImageSlider: UIViewRepresentable {
     public let isZoomEnabled: Bool
     public let maximumZoomScale: CGFloat
     public let isCircular: Bool
-    public let contentMode: UIViewContentMode = UIViewContentMode.scaleAspectFit
+    public let contentMode: UIViewContentMode
     public var singleTapped: (() -> Void)?
     
     public init(inputSources: [InputSource],
@@ -23,12 +23,14 @@ public struct UtechiaImageSlider: UIViewRepresentable {
                 isZoomEnabled: Bool = true,
                 maximumZoomScale: CGFloat = 3.5,
                 isCircular: Bool = false,
+                contentMode: UIViewContentMode = UIViewContentMode.scaleAspectFit,
                 singleTapped: (() -> Void)?) {
         self.inputSources = inputSources
         self._currentPageNumber = currentPageNumber
         self.isZoomEnabled = isZoomEnabled
         self.maximumZoomScale = maximumZoomScale
         self.isCircular = isCircular
+        self.contentMode = contentMode
         self.singleTapped = singleTapped
     }
     
