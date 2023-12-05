@@ -16,6 +16,10 @@ public struct UtechiaImageSlider: UIViewRepresentable {
     public let maximumZoomScale: CGFloat
     public let isCircular: Bool
     public let contentMode: UIViewContentMode
+    public let showPageIndicator: Bool
+    public let currentPageIndicatorTintColor: UIColor
+    public let pageIndicatorTintColor: UIColor
+    public let pageIndicatorPosition: PageIndicatorPosition
     public var singleTapped: (() -> Void)?
     
     public init(inputSources: [InputSource],
@@ -24,6 +28,10 @@ public struct UtechiaImageSlider: UIViewRepresentable {
                 maximumZoomScale: CGFloat = 3.5,
                 isCircular: Bool = false,
                 contentMode: UIViewContentMode = UIViewContentMode.scaleAspectFit,
+                showPageIndicator: Bool = false,
+                currentPageIndicatorTintColor: UIColor = .lightGray,
+                pageIndicatorTintColor: UIColor = .black,
+                pageIndicatorPosition: PageIndicatorPosition = .init(),
                 singleTapped: (() -> Void)?) {
         self.inputSources = inputSources
         self._currentPageNumber = currentPageNumber
@@ -31,6 +39,10 @@ public struct UtechiaImageSlider: UIViewRepresentable {
         self.maximumZoomScale = maximumZoomScale
         self.isCircular = isCircular
         self.contentMode = contentMode
+        self.showPageIndicator = showPageIndicator
+        self.currentPageIndicatorTintColor = currentPageIndicatorTintColor
+        self.pageIndicatorTintColor = pageIndicatorTintColor
+        self.pageIndicatorPosition = pageIndicatorPosition
         self.singleTapped = singleTapped
     }
     
@@ -38,7 +50,15 @@ public struct UtechiaImageSlider: UIViewRepresentable {
         slideShow.setImageInputs(inputSources)
         slideShow.zoomEnabled = isZoomEnabled
         slideShow.maximumScale = maximumZoomScale
-        slideShow.pageIndicator = nil
+        if showPageIndicator {
+            let pageIndicator = UIPageControl()
+            pageIndicator.currentPageIndicatorTintColor = currentPageIndicatorTintColor
+            pageIndicator.pageIndicatorTintColor = pageIndicatorTintColor
+            slideShow.pageIndicator = pageIndicator
+            slideShow.pageIndicatorPosition = pageIndicatorPosition
+        } else {
+            slideShow.pageIndicator = nil
+        }
         slideShow.circular = isCircular
         slideShow.contentScaleMode = contentMode
         slideShow.delegate = context.coordinator
