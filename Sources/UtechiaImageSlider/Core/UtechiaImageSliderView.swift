@@ -21,6 +21,7 @@ public struct UtechiaImageSlider: UIViewRepresentable {
     public let pageIndicatorTintColor: UIColor
     public let pageIndicatorPosition: PageIndicatorPosition
     public let slideshowInterval: TimeInterval
+    public let enableHaptic: Bool
     public var singleTapped: (() -> Void)?
     
     public init(inputSources: [InputSource],
@@ -34,6 +35,7 @@ public struct UtechiaImageSlider: UIViewRepresentable {
                 pageIndicatorTintColor: UIColor = .black,
                 pageIndicatorPosition: PageIndicatorPosition = .init(),
                 slideshowInterval: TimeInterval = 0,
+                enableHaptic: Bool = false,
                 singleTapped: (() -> Void)?) {
         self.inputSources = inputSources
         self._currentPageNumber = currentPageNumber
@@ -46,6 +48,7 @@ public struct UtechiaImageSlider: UIViewRepresentable {
         self.pageIndicatorTintColor = pageIndicatorTintColor
         self.pageIndicatorPosition = pageIndicatorPosition
         self.slideshowInterval = slideshowInterval
+        self.enableHaptic = enableHaptic
         self.singleTapped = singleTapped
     }
     
@@ -97,8 +100,10 @@ public struct UtechiaImageSlider: UIViewRepresentable {
         }
         uiView.currentPageChanged = { number in
             currentPageNumber = number
-            let impactMed = UIImpactFeedbackGenerator(style: .medium)
-            impactMed.impactOccurred()
+            if enableHaptic {
+                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                impactMed.impactOccurred()
+            }
         }
     }
 }
